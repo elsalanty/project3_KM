@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
-    "start:prod": "node server.js",
-    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "start:prod": "cd server && node server.js",
+    "start:dev": "concurrently \"cd server && nodemon server.js --ignore 'client/*'\" \"npm run client\"",
     "dev": "nodemon server.js",
     "client": "cd client && npm run start",
     "seed": "node scripts/seedDB.js",
@@ -16,16 +16,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^4.1.0",
+    "concurrently": "^4.1.2",
     "nodemon": "^1.19.4"
   },
   "dependencies": {
-    "axios": "^0.19.0",
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
     "connect-flash": "^0.1.1",
-    "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.0",
     "express-session": "^1.17.0",
