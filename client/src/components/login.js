@@ -9,7 +9,7 @@ class Welcome extends Component {
         <div className="medium-12 columns">
           <h2 id="welcomeText">Let's Learn Science The Easy Way</h2>
           <GoogleLogin
-            clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+            clientId="906557148812-t37m6os1ima7kci2a80jscvfj603c3em.apps.googleusercontent.com"
             buttonText="Login"
             onSuccess={responseGoogle}
             onFailure={responseGoogle}

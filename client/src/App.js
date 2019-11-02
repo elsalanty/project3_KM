@@ -1,19 +1,108 @@
+/* global gapi */
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ReactDOM from "react-dom";
+import GoogleLogin from "react-google-login";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./App.css";
 
+// const responseGoogle = response => {
+//   console.log(response);
+// };
+
+// ReactDOM.render(
+//   <GoogleLogin
+//     clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+//     buttonText="Login"
+//     onSuccess={responseGoogle}
+//     onFailure={responseGoogle}
+//     cookiePolicy={"single_host_origin"}
+//   />,
+//   document.getElementById("googleButton")
+// );
+
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isSignedIn: false
+    };
+  }
+
+  //client id: 906557148812-t37m6os1ima7kci2a80jscvfj603c3em.apps.googleusercontent.com
+  //client secret: UfHEMY8R54m7-W87heHGSisk
+  componentDidMount() {
+    const successCallback = this.onSuccess.bind(this);
+
+    window.gapi.load("auth2", () => {
+      this.auth2 = gapi.auth2.init({
+        client_id:
+          "906557148812-t37m6os1ima7kci2a80jscvfj603c3em.apps.googleusercontent.com"
+      });
+
+      // this.auth2.attachClickHandler(document.querySelector('#loginButton'), {}, this.onLoginSuccessful.bind(this))
+
+      this.auth2.then(() => {
+        console.log("on init");
+        this.setState({
+          isSignedIn: this.auth2.isSignedIn.get()
+        });
+      });
+    });
+
+    window.gapi.load("signin2", function() {
+      // Method 3: render a sign in button
+      // using this method will show Signed In if the user is already signed in
+      var opts = {
+        width: 200,
+        height: 50,
+        client_id:
+          "906557148812-t37m6os1ima7kci2a80jscvfj603c3em.apps.googleusercontent.com",
+        onSuccess: successCallback
+      };
+      gapi.signin2.render("loginButton", opts);
+    });
+  }
+
+  onSuccess() {
+    console.log("on success");
+    this.setState({
+      isSignedIn: true,
+      err: null
+    });
+  }
+
+  onLoginFailed(err) {
+    this.setState({
+      isSignedIn: false,
+      error: err
+    });
+  }
+
+  getContent() {
+    if (this.state.isSignedIn) {
+      return <p>hello, you're signed in</p>;
+    } else {
+      return (
+        <div>
+          <h3>Click here to sign in</h3>
+          <button id="loginButton"></button>
+        </div>
+      );
+    }
+  }
+
   render() {
     return (
       <div className="App">
-        <div className="App-header">
+        <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
+          <h1>Welcome to Learning Bug</h1>
+        </header>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+          <h2>Let's Learn Science the Easy Way</h2>
           <a href="/auth/google" class="button">
             <div>
               <span class="svgIcon t-popup-svg">
