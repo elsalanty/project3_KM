@@ -1,3 +1,4 @@
+/* global gapi */
 import React, { Component } from "react";
 import GoogleLogin from "react-google-login";
 import { PostData } from "../services/PostData";
@@ -53,3 +54,5 @@ class Welcome extends Component {
     );
   }
 }
+
+export default Welcome;
