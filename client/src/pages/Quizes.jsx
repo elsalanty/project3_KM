@@ -29,6 +29,8 @@ import {
   quizQuestionAnswers
 } from "../variables/Variables";
 
+import axios from 'axios';
+
 class Quizes extends Component {
   constructor(props) {
     super(props);
@@ -58,6 +60,16 @@ class Quizes extends Component {
        }
      })
      this.setState({userScore: score,quizComplete:true})
+     axios.post('/api/quiz', {
+      userAnswers,
+      score
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
   handleRadio(e,questionId){
