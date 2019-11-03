@@ -4,7 +4,9 @@
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
+    "node-sass": "^4.13.0",
     "react": "^16.6.3",
+    "react-bootstrap": "^1.0.0-beta.14",
     "react-dom": "^16.6.3",
     "react-google-login": "^5.0.7",
     "react-router-dom": "^5.1.2",
