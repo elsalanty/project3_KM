@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
-
+import GoogleAuth from './GoogleAuth'
 
 class Header extends React.Component{
     render(){
@@ -9,7 +9,9 @@ class Header extends React.Component{
                 <div className="container">
                 <div className="collapse navbar-collapse" id="navbarResponsive">
                 <ul className="navbar-nav">
-                <li className="nav-item"><Link className="navbar-brand" to={'/signIn'}>Sign in with Google</Link></li>
+                <li className="nav-item">
+                    <GoogleAuth />
+                    </li>
                             <li className="nav-item"><Link className="navbar-brand" to={'/module'}>Module</Link></li>
                             <li className="nav-item"><Link className="navbar-brand" to={'/quiz'}>Take Quiz</Link></li>
                       </ul>
