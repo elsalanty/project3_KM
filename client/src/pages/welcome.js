@@ -16,12 +16,16 @@ class Welcome extends Component {
 
   signup(res, type) {
     let postData;
+    console.log(res);
     if (type === "google" && res.w3.U3) {
+      postData = res.w3.U3;
     }
 
     PostData("signup", postData).then(result => {
       let responseJson = result;
+      console.log(responseJson);
       if (responseJson.userData) {
+        console.log("post data if");
         sessionStorage.setItem("userData", JSON.stringify(responseJson));
         this.setState({ redirectToReferrer: true });
       }
@@ -30,7 +34,7 @@ class Welcome extends Component {
 
   render() {
     if (this.state.redirectToReferrer) {
-      return <Redirect to={"/home"} />;
+      return <Redirect to={"/dashboard"} />;
     }
 
     const responseGoogle = response => {

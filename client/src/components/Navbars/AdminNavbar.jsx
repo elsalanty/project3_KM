@@ -20,7 +20,7 @@ import { Navbar } from "react-bootstrap";
 
 import AdminNavbarLinks from "./AdminNavbarLinks.jsx";
 
-class AdminNavbar extends Component {
+class Header extends Component {
   constructor(props) {
     super(props);
     this.mobileSidebarToggle = this.mobileSidebarToggle.bind(this);
@@ -61,4 +61,4 @@ class AdminNavbar extends Component {
   }
 }
 
-export default AdminNavbar;
+export default Header;

@@ -16,16 +16,17 @@
 
 */
 import React, { Component } from "react";
-//import ChartistGraph from "react-chartist";
-import { Container, Row, Col, Button } from "react-bootstrap";
 
-import { Card } from "../components/Card/Card";
+//import Grid from "react-bootstrap";
+
+//import ChartistGraph from "react-chartist";
+import { Row, Col, Button, Grid } from "react-bootstrap";
+
+import { Card } from "../../../client/src/components/Card/Card";
 //import { StatsCard } from "components/StatsCard/StatsCard.jsx";
 //import { Tasks } from "components/Tasks/Tasks.jsx";
 
-import {
-  moduleText
-} from "../variables/Variables";
+import { moduleText } from "../../../client/src/variables/Variables";
 
 class Modules extends Component {
   constructor(props) {
@@ -36,50 +37,53 @@ class Modules extends Component {
     };
   }
 
-  openModule(id){
-    console.log(id)
+  openModule(id) {
+    console.log(id);
     this.setState({
       displayModule: true
-    })
+    });
   }
 
   render() {
-    var module = null
-    if(this.state.displayModule === true){
+    var module = null;
+    if (this.state.displayModule === true) {
       module = (
-        <div> 
+        <div>
           <h2>Biology</h2>
-          {
-            moduleText.map((data) => {
-              return(
-                <div>
-                  <h4> {data} </h4>
-                </div>
-              );
-            })
-          }
+          {moduleText.map(data => {
+            return (
+              <div>
+                <h4> {data} </h4>
+              </div>
+            );
+          })}
         </div>
-      )
+      );
     }
 
     return (
       <div className="content">
-        <Container fluid>
+        <Grid fluid>
           <Row>
             <h1>My Course Page</h1>
             <Col md={4}>
-              <Card 
+              <Card
                 title="Biology"
                 id="biology"
                 content={
-                  <Button id="biology" variant="warning" onClick={(e) => this.openModule(e.target.id)}>Start Module</Button>
+                  <Button
+                    id="biology"
+                    variant="warning"
+                    onClick={e => this.openModule(e.target.id)}
+                  >
+                    Start Module
+                  </Button>
                 }
-              > 
-              </Card>
+              ></Card>
             </Col>
           </Row>
           {module}
-        </Container>
+        </Grid>
       </div>
     );
   }
