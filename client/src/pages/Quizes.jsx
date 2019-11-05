@@ -17,19 +17,18 @@
 */
 import React, { Component } from "react";
 //import ChartistGraph from "react-chartist";
-import {  Row, Col, Button, Form } from "react-bootstrap";
-import {Container} from 'react-bootstrap'
+import { Row, Col, Button, Grid, Form } from "react-bootstrap";
 //import Form from 'react-bootstrap/Form';
 
-import { Card } from "../components/Card/Card";
+import { Card } from "../../../client/src/components/Card/Card";
 //import { StatsCard } from "components/StatsCard/StatsCard.jsx";
 //import { Tasks } from "components/Tasks/Tasks.jsx";
 import {
   quizQuestions,
   quizQuestionAnswers
-} from "../variables/Variables";
+} from "../../../client/src/variables/Variables";
 
-import axios from 'axios';
+import axios from "axios";
 
 class Quizes extends Component {
   constructor(props) {
@@ -37,59 +36,66 @@ class Quizes extends Component {
     this.state = {
       //quizQuestions: quizQuestions,
       displayQuiz: false,
-      quizAnswers:[]
+      quizAnswers: []
     };
   }
 
-  openQuiz(id){
-    console.log(id)
+  openQuiz(id) {
+    console.log(id);
     this.setState({
       displayQuiz: true,
-      quizComplete:false
-    })
-  }
-
-  handleClick=(e)=>{
-     //user clicked submit, so lets evaluate all the user answers
-     const userAnswers = this.state.quizAnswers;
-     let score = 0;
-     userAnswers.map(userAnswer=>{
-       const currentQuestionDetails = quizQuestionAnswers.find(q=>q.questionId === userAnswer.questionId);
-       if (userAnswer.answerId === currentQuestionDetails.correctAnswerId){
-         score = score + 1;
-       }
-     })
-     this.setState({userScore: score,quizComplete:true})
-     axios.post('/api/quiz', {
-      userAnswers,
-      score
-    })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
+      quizComplete: false
     });
   }
 
-  handleRadio(e,questionId){
-    console.log('user selected',e.target.value) 
+  handleClick = e => {
+    //user clicked submit, so lets evaluate all the user answers
+    const userAnswers = this.state.quizAnswers;
+    let score = 0;
+    userAnswers.map(userAnswer => {
+      const currentQuestionDetails = quizQuestionAnswers.find(
+        q => q.questionId === userAnswer.questionId
+      );
+      if (userAnswer.answerId === currentQuestionDetails.correctAnswerId) {
+        score = score + 1;
+      }
+    });
+    this.setState({ userScore: score, quizComplete: true });
+    axios
+      .post("/api/quiz", {
+        userAnswers,
+        score
+      })
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
+
+  handleRadio(e, questionId) {
+    console.log("user selected", e.target.value);
     const existingState = this.state.quizAnswers;
-    this.setState({quizAnswers: [...existingState,{questionId: questionId,answerId: e.target.value }]})
+    this.setState({
+      quizAnswers: [
+        ...existingState,
+        { questionId: questionId, answerId: e.target.value }
+      ]
+    });
   }
 
   render() {
-    console.log('current state',this.state.quizAnswers)
-    var questions = null
-    if(this.state.displayQuiz === true){
+    console.log("current state", this.state.quizAnswers);
+    var questions = null;
+    if (this.state.displayQuiz === true) {
       questions = (
         <div>
-        <div> 
-          {
-            // quizQuestions.map((data) => {
+          <div>
+            {// quizQuestions.map((data) => {
             //   return(
             //     <div>
-            //       <h4> {data} </h4>  
+            //       <h4> {data} </h4>
             //       <Form>
             //         <input type="radio" id="dewey" name="drone" value="dewey"/>
             //         <label for="dewey">Option A</label>
@@ -105,52 +111,67 @@ class Quizes extends Component {
             //     </div>
             //   );
             // })
-            quizQuestionAnswers.map(questionAnswer=>{
+            quizQuestionAnswers.map(questionAnswer => {
               const answers = questionAnswer.answers;
               return (
                 <div>
                   <h4>{questionAnswer.question}</h4>
-                  {answers.map(answer=>{
+                  {answers.map(answer => {
                     return (
                       <div>
-                        <input onChange={(e)=>{this.handleRadio(e,questionAnswer.questionId)}} type="radio" id={answer.id} name={questionAnswer.questionId} value={answer.id} />
-                      <label for={answer.id}>{answer.value}</label> 
+                        <input
+                          onChange={e => {
+                            this.handleRadio(e, questionAnswer.questionId);
+                          }}
+                          type="radio"
+                          id={answer.id}
+                          name={questionAnswer.questionId}
+                          value={answer.id}
+                        />
+                        <label for={answer.id}>{answer.value}</label>
                       </div>
-                    )
+                    );
                   })}
-                 
                 </div>
-              )
-            })
-            
-          }
+              );
+            })}
+          </div>
+          <div>
+            <input
+              type="submit"
+              value="Submit"
+              onClick={this.handleClick}
+            ></input>
+          </div>
         </div>
-        <div>
-          <input  type="submit" value="Submit" onClick={this.handleClick}></input>
-        </div>
-        </div>
-      )
+      );
     }
 
     return (
-    
       <div className="content">
-        <Container fluid>
-          <Row> 
+        <Grid fluid>
+          <Row>
             <Col md={4}>
-              <Card 
+              <Card
                 title="Quiz 1"
                 id="quiz1"
                 content={
-                  <Button id="quiz1" variant="warning" onClick={(e) => this.openQuiz(e.target.id)}>Take Quiz</Button>
+                  <Button
+                    id="quiz1"
+                    variant="warning"
+                    onClick={e => this.openQuiz(e.target.id)}
+                  >
+                    Take Quiz
+                  </Button>
                 }
-              > 
-              </Card>
+              ></Card>
             </Col>
           </Row>
-          { questions }
-          {this.state.quizComplete && <div>Your final score is : {this.state.userScore}</div>}
-        </Container>
+          {questions}
+          {this.state.quizComplete && (
+            <div>Your final score is : {this.state.userScore}</div>
+          )}
+        </Grid>
       </div>
     );
   }

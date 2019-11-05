@@ -3,13 +3,12 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import welcome from "./pages/welcome";
 import dashboard from "./pages/dashboard";
 import courses from "./pages/courses";
-import modules from './pages/Modules';
+import modules from "./pages/Modules";
 import quiz from "./pages/Quizes";
 //import login2 from "./pages/login2";
 //import Navbar from "./components/Navbar";
 //import Footer from "./components/Footer";
 //import Wrapper from "./components/Wrapper";
-
 
 function App() {
   return (

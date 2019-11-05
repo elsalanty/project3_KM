@@ -22,8 +22,8 @@
 //import Icons from "views/Icons.jsx";
 //import Maps from "views/Maps.jsx";
 //import Notifications from "views/Notifications.jsx";
-import Modules from "./pages/Modules"
-import Quizes from "./pages/Quizes"
+import Modules from "./views/Modules"
+import Quizes from "./views/Quizes"
 
 const dashboardRoutes = [
   {
