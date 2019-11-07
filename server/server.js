@@ -4,7 +4,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const bodyParser = require("body-parser");
 //const cors = require("cors");
-const routes = require("./routes");
+
 const mongoose = require("mongoose");
 //const apbioRoutes = express.Router();
 
@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === "production") {
 
 //app.use(cors());
 app.use(bodyParser.json());
-
+const routes = require("./routes");
 //start mongo from the terminal. you have mongod already running int he background. get the number from the command line. More information found in the tutorial called The MERN Stack tutorial: building a React CRUD appplication part 2
 mongoose.connect("mongodb://127.0.0.1:27017/apbio", { useNewUrlParser: true });
 

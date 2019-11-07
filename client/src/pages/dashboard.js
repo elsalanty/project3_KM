@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, Route } from "react-router-dom";
 
 import Courses from "./courses";
-import Quiz from "./quiz";
+import Quiz from "./Quizes";
 
 class Dashboard extends Component {
   render() {
