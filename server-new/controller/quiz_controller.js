@@ -21,5 +21,14 @@ module.exports = {
         })
 
        
+    },
+
+    saveQuiz(req,res){
+        const userProps = req.body;
+        console.log('user passed data : ',userProps);
+        Quiz.updateOne({userEmail: userProps.userEmail}, userProps).then(user=>{
+            console.log('update mongodb with coursename and quizScore',user);
+            res.send(user)
+        })
     }
 }

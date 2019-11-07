@@ -20,13 +20,22 @@ import axios from 'axios'; //library used to make api calls
      })
 
    }
+
+   saveQuiz = (score)=>{
+     const data = {userEmail: this.state.userEmail, courseName: 'Module1', quizScore: score};
+     axios.post('/api/saveQuiz',data).then(response=>{
+       console.log('quiz score updated',response);
+      
+     })
+   }
+
    render(){
       return (
         <BrowserRouter>
         <Header userEmail={this.state.userEmail} saveUser={this.saveUser} />
         <Switch>
         <Route path="/module" component={Module} />
-        <Route path="/quiz" render={(props)=> <Quiz {...props} />} />
+        <Route path="/quiz" render={(props)=> <Quiz {...props} {...this.state} saveQuiz={this.saveQuiz} />} />
         </Switch>
           
         </BrowserRouter>
