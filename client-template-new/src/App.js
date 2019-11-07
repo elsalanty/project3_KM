@@ -22,7 +22,7 @@ import axios from 'axios'; //library used to make api calls
    }
 
    saveQuiz = (score)=>{
-     const data = {userEmail: this.state.userEmail, courseName: 'Module1', quizScore: score};
+     const data = {userEmail: this.state.useremail, courseName: 'Module1', quizScore: score};
      axios.post('/api/saveQuiz',data).then(response=>{
        console.log('quiz score updated',response);
       
@@ -30,9 +30,12 @@ import axios from 'axios'; //library used to make api calls
    }
 
    render(){
+     const imgURL=require('./assets/Learning_Bug_Sample.jpg')
       return (
         <BrowserRouter>
         <Header userEmail={this.state.userEmail} saveUser={this.saveUser} />
+      <img src = {imgURL} style = {{width:"300px",height:"300px", marginTop:"100px", marginLeft:"110px"}}/> 
+
         <Switch>
         <Route path="/module" component={Module} />
         <Route path="/quiz" render={(props)=> <Quiz {...props} {...this.state} saveQuiz={this.saveQuiz} />} />

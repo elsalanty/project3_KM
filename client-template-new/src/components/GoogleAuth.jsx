@@ -33,6 +33,7 @@ class GoogleAuth extends React.Component{
 
     onSignOut = ()=>{
         this.auth.signOut();
+        window.location.href="http://localhost:3000";
     }
 
     onAuthChange =()=>{
@@ -44,11 +45,11 @@ class GoogleAuth extends React.Component{
         return(
             <div className="nav-link">
                    {this.state.isSignedIn && <p className="bs-component" onClick={this.onSignOut}>
-                    <button type="button" className="btn btn-danger">SignOut</button>
+                    <button type="button" className="btn btn-info">Sign Out</button>
                    </p>}
 
                    {!this.state.isSignedIn && <p className="bs-component" onClick={this.onSignIn}>
-                    <button type="button" className="btn btn-warning">Sign In with Google</button>
+                    <button type="button" className="btn btn-primary">Sign In with Google</button>
                    </p>
                 }
                 
