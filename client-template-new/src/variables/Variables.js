@@ -13,21 +13,26 @@ var quizQuestions = [
   ]
   var quizQuestionAnswers = [
     {
-      question: '1. What is the moral of the story?',
+      question: '1. The diameter of a typical bacteria',
       questionId:'1',
       correctAnswerId:'1a2',
       answers:[
         {
           id:'1a1',
-          value:'moral'
+          value:'0.1 to 1 µm'
         },
         {
           id:'1a2',
-          value:'2nd option of the answer'
+          value:'1 to 5 µm'
         },
         {
           id:'1a3',
-          value:'3rd option of the answer'
+          value:'10 to 100 µm'
+        },
+
+        {
+          id:'1a4',
+          value:'100 to 1000 µm'
         },
       ]
     },

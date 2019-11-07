@@ -5,9 +5,21 @@ module.exports = {
         console.log('create user method called');
         const userProps = req.body;
         console.log('user values',userProps);
-        Quiz.create(userProps).then(user=>{
-            console.log('record created in the db',user);
-            res.send(user);
+        //check if the userEmail already exists in our quiz model in mongodb
+        Quiz.findOne({userEmail: userProps.userEmail}).then(user=>{
+            if (user){
+                //looks like we found a record
+                console.log('user already exists',user);
+                res.send(user)
+            }else{
+                //looks like the email does not exist in the database, so lets go ahead insert the record
+                Quiz.create(userProps).then(user=>{
+                console.log('record created in the db',user);
+                res.send(user);
+                })
+            }
         })
+
+       
     }
 }

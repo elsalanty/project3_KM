@@ -26,7 +26,8 @@ class GoogleAuth extends React.Component{
         this.auth.signIn().then(res=>{
             const userEmail = this.auth.currentUser.get().getBasicProfile().getEmail();
             const userName = this.auth.currentUser.get().getBasicProfile().getName();
-            this.setState({isSignedIn:true})
+            this.props.saveUser(userEmail)
+           
         })
     }
 

@@ -10,7 +10,7 @@ class Header extends React.Component{
                 <div className="collapse navbar-collapse" id="navbarResponsive">
                 <ul className="navbar-nav">
                 <li className="nav-item">
-                    <GoogleAuth />
+                    <GoogleAuth userEmail={this.props.userEmail} saveUser={this.props.saveUser}/>
                     </li>
                             <li className="nav-item"><Link className="navbar-brand" to={'/module'}>Module</Link></li>
                             <li className="nav-item"><Link className="navbar-brand" to={'/quiz'}>Take Quiz</Link></li>
