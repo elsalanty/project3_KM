@@ -3,14 +3,18 @@
   "version": "1.0.0",
   "description": "Mern Demo",
   "main": "server.js",
+  "engines":{
+    "node":"10.16.0",
+    "npm":"6.11.3"
+  },
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
-    "start:prod": "cd server && node server.js",
+    "start:prod": "cd server-new && node index.js",
     "start:dev": "concurrently \"cd server && nodemon server.js --ignore 'client/*'\" \"npm run client\"",
     "dev": "nodemon server.js",
     "client": "cd client && npm run start",
     "seed": "node scripts/seedDB.js",
-    "build": "cd client && npm run build",
+    "build": "cd client-template-new && npm run build",
     "heroku-postbuild": "npm run build"
   },
   "author": "",
