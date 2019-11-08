@@ -1,28 +1,51 @@
-import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import welcome from "./pages/welcome";
-import dashboard from "./pages/dashboard";
-import courses from "./pages/courses";
-import modules from "./pages/Modules";
-import quiz from "./pages/Quizes";
-//import login2 from "./pages/login2";
-//import Navbar from "./components/Navbar";
-//import Footer from "./components/Footer";
-//import Wrapper from "./components/Wrapper";
+import React from 'react';
+import {BrowserRouter,Route,Switch} from 'react-router-dom';
+import Header from './components/Header'
+import Quiz from './components/Quiz';
+import Module from './components/Module';
+import axios from 'axios'; //library used to make api calls
 
-function App() {
-  return (
-    <Router>
-      <div>
-        <Route exact path="/" component={welcome} />
-        <Route exact path="/login" component={welcome} />
-        <Route exact path="/dashboard" component={dashboard} />
-        <Route exact path="/courses" component={courses} />
-        <Route exact path="/modules" component={modules} />
-        <Route exact path="/quiz" component={quiz} />
-      </div>
-    </Router>
-  );
+ class App extends React.Component{
+   //this is the top level component which will hold the state for userEmail
+   state={
+    userEmail: null
+   }
+
+   //saveUser function will get invoked from GoogleAuth.jsx once the user successfully signs in
+   //we will use this function here to invoke the server api to create user
+   saveUser = (userEmail)=>{
+     axios.post('/api/createUser',{userEmail}).then(response=>{
+       console.log('response back from server',response);
+       this.setState({userEmail})
+     })
+
+   }
+
+   saveQuiz = (score)=>{
+     const data = {userEmail: this.state.useremail, courseName: 'Module1', quizScore: score};
+     axios.post('/api/saveQuiz',data).then(response=>{
+       console.log('quiz score updated',response);
+      
+     })
+   }
+
+   render(){
+     const imgURL=require('./assets/Learning_Bug_Sample.jpg')
+      return (
+        <BrowserRouter>
+        <Header userEmail={this.state.userEmail} saveUser={this.saveUser} />
+      <img src = {imgURL} style = {{width:"300px",height:"300px", marginTop:"100px", marginLeft:"110px"}}/> 
+
+        <Switch>
+        <Route path="/module" component={Module} />
+        <Route path="/quiz" render={(props)=> <Quiz {...props} {...this.state} saveQuiz={this.saveQuiz} />} />
+        </Switch>
+          
+        </BrowserRouter>
+
+      );
+   }
+  
 }
 
 export default App;

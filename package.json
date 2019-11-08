@@ -14,7 +14,7 @@
     "dev": "nodemon server.js",
     "client": "cd client-new && npm run start",
     "seed": "node scripts/seedDB.js",
-    "heroku-postbuild": "cd client-template-new && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "author": "",
   "license": "ISC",

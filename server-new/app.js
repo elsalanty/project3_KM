@@ -6,7 +6,7 @@ const path = require('path');
 
 const app = express();
 
-app.use(express.static(path.join(__dirname,"../client-template-new/build")))
+app.use(express.static(path.join(__dirname,"../client/build")))
 
 //connect to mongodb
 mongoose.connect('mongodb://localhost:27017/googlequiz',
@@ -17,7 +17,7 @@ mongoose.connect('mongodb://localhost:27017/googlequiz',
 app.use(bodyParser.json());
 
 app.get("*",(req,res)=>{
-    res.sendFile(path.join(__dirname,"../client-template-new/build/index.html"))
+    res.sendFile(path.join(__dirname,"../client/build/index.html"))
 })
 
 routes(app);
