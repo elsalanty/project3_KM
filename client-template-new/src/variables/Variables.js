@@ -62,7 +62,7 @@ var quizQuestionAnswers = [
   },
   {
     question: '3. The larger the size of the organism is',
-    questionId:'2',
+    questionId:'3',
     correctAnswerId:'3a2',
     answers:[
       {
