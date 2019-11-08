@@ -31,7 +31,8 @@ class Quiz extends React.Component{
            if (userAnswer.answerId === currentQuestionDetails.correctAnswerId){
              score = score + 1;
            }
-         })
+         });
+         this.props.saveQuiz(score);
          this.setState({userScore: score,quizComplete:true})
       }
     
