@@ -6,8 +6,8 @@
 //that won't work because our server runs on http://localhost:5000
 //so this proxy specifies that any request to /api should goto our server app http://localhost:5000
 
-const proxy = require('http-proxy-middleware/dist');
+const proxy = require("http-proxy-middleware/dist");
 
-module.exports = function(app){
-    app.use(proxy(['/api'],{target: 'http://localhost:5000'}));
-}
+module.exports = function(app) {
+  app.use(proxy(["/api"], { target: "http://localhost:5000" }));
+};
